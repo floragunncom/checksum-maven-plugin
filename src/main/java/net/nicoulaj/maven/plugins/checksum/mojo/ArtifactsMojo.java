@@ -112,15 +112,7 @@ public class ArtifactsMojo
     @Parameter( defaultValue = "artifacts-checksums.sha" )
     protected String shasumSummaryFile;
 
-    /**
-     * Append the artifact filename in the generated checksum file.
-     * This parameter require the parameter individualFiles be equal to true.
-     *
-     * @see #individualFiles
-     * @since 1.4
-     */
-    @Parameter (defaultValue = "false")
-    protected boolean appendFilename;
+
 
     /**
      * Constructor.
@@ -203,13 +195,7 @@ public class ArtifactsMojo
         return individualFilesOutputDirectory;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isAppendFilename(){
-        return this.appendFilename;
-    }
+
 
     /**
      * {@inheritDoc}

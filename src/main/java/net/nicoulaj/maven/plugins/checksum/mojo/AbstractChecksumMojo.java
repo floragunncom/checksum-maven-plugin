@@ -152,6 +152,19 @@ abstract class AbstractChecksumMojo
     @Parameter( defaultValue = "" )
     protected String relativeSubPath = "";
 
+
+    /**
+     * Append the artifact filename in the generated checksum file.
+     * This parameter require the parameter individualFiles be equal to true.
+     *
+     * @since 1.4
+     */
+    @Parameter (defaultValue = "false")
+    protected boolean appendFilename;
+
+
+
+
     /**
      * Constructor.
      *
@@ -246,7 +259,7 @@ abstract class AbstractChecksumMojo
     protected abstract boolean isIndividualFiles();
 
     protected boolean isAppendFilename(){
-        return false;
+        return this.appendFilename;
     }
 
     protected abstract String getIndividualFilesOutputDirectory();

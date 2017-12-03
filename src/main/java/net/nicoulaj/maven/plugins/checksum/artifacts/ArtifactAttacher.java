@@ -18,6 +18,7 @@ package net.nicoulaj.maven.plugins.checksum.artifacts;
 
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.project.MavenProjectHelper;
+import org.codehaus.plexus.util.FileUtils;
 
 import java.io.File;
 
@@ -32,10 +33,14 @@ public class ArtifactAttacher implements ArtifactListener {
 
     @Override
     public void artifactCreated(File artifact, String type) {
+
         if (type.startsWith(".")) {
+            String originalFileExtension = FileUtils.extension(artifact.getAbsolutePath().replace(type,""));
             // Project helper expects a type without leading dot (e.g. turn ".md5" into "md5").
             type = type.substring(1);
+            projectHelper.attachArtifact(project, type, originalFileExtension, artifact);
+        } else {
+            projectHelper.attachArtifact(project, type, null, artifact);
         }
-        projectHelper.attachArtifact(project, type, null, artifact);
     }
 }
